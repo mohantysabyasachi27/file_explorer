@@ -1,0 +1,70 @@
+   // app.get('/content/:category', (req, res) => {
+  //   var category = req.params.category;
+  //   const newPath = './content/'+ category;
+  //   console.log('category===' + newPath);
+  //   getPathContent(newPath, null).then((pathContent) => {
+  //     res.json(pathContent);
+  //   }, (err) => {
+  //     res.status(422).json({
+  //       message: `${err}`
+  //     });
+  //   })
+  // })
+  
+  const fileStructure = (req, res) => {
+    console.log('req.path-------'+req.path);
+    var currentDir = './content/environment';
+    console.log('currentDir::' + currentDir);
+    let data = [];
+    files = fs.readdir(currentDir , (files)=> {
+      if (files && files.length) {
+        console.log('not found')
+      } else{
+        files.forEach(file => {
+          console.log('foreach'+file);
+          data.push(processFiles(file, currentDir));
+        });
+      }  
+    });
+      console.log(data);
+      res.json(data);
+  }
+  
+  const processFiles = (file, currentDir) => {
+    console.log('processFiles' + file);
+    let data = {};
+    let isDirectory =
+      fs.statSync(path.join(currentDir, file)).isDirectory();
+    let size =
+      fs.statSync(path.join(currentDir, file)).size;
+    if (isDirectory) {
+      return {
+        Name: file,
+        IsDirectory: true,
+        Size: "--",
+        style: "fa fa-fw fa-folder",
+        Path: path.join(currentDir, file)
+      };
+    } else {
+      let ext = path.extname(file);
+      let filestr;
+      filestr = file;
+      let rstr = currentDir;
+      var style;
+      if(ext === '.mp4'){
+        style = "fa fa-fw fa-film ";
+      }else if(ext === '.pdf'){
+        style ="fa fa-fw fa-file-text ";
+      } 
+  
+      return {
+        Name: filestr,
+        Ext: ext,
+        style: style,
+        IsDirectory: false,
+        Size: size + " KB",
+        Path: path.join(currentDir, file),
+        Root: rstr
+      };
+    }
+  }

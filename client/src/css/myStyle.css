@@ -1,0 +1,21 @@
+.search-bar{
+    width: 30% !important;
+    float: right;
+    margin-top: 5%;
+    padding: 2px;
+}
+
+.bar{
+    width: 50% !important;
+    float: right;
+    margin-top: 5%;
+}
+
+.btn-search{
+    width: 15% !important;
+    float: right;
+    margin-top: 5%;
+}
+.test + .test {
+    margin: 0 0 0 8px;
+}

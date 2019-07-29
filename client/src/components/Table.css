@@ -1,0 +1,16 @@
+.rows .row {
+    display: inline-block;
+ }
+ #search_section {
+     width: 33%;
+ }
+
+ .logo-container{
+     margin:0;
+     padding: 0;
+ }
+ .logo{
+     height: 50px;
+     padding-right: 15px;
+     padding-left: 0px;
+ }
