@@ -4,12 +4,11 @@ import Modal from '@material-ui/core/Modal';
 import PropTypes from "prop-types";
 import Iframe from 'react-iframe';
 
-
-function rand() {
+const rand = () => {
   return Math.round(Math.random() * 20) - 10;
 }
 
-function getModalStyle() {
+const getModalStyle = () => {
   const top = 50 + rand();
   const left = 50 + rand();
 
@@ -32,15 +31,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SimpleModal = ({src, openModal, setModal}) => {
-  useEffect(()=> {
-    if(openModal){
+const SimpleModal = ({ src, openModal, setModal }) => {
+  useEffect(() => {
+    if (openModal) {
       setOpen(true);
     }
-  })
-  console.log('Inside SimpleModal'+ src+ openModal)
+  });
+
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
@@ -69,14 +67,15 @@ const SimpleModal = ({src, openModal, setModal}) => {
           <p id="simple-modal-description">
             Description: Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </p>
-      <Iframe src={src}
-        width="1000px"
-        height="600px"
-        id="myId"
-        display="initial"
-        position="relative"/>
+          <Iframe url={src}
+            allowFullScreen
+            width="1000px"
+            height="600px"
+            id="myId"
+            display="initial"
+            position="relative"
+            type="" />
           {/* <Iframe src={src} height="400px" width="725px" /> */}
- 
         </div>
       </Modal>
     </div>
@@ -91,9 +90,9 @@ const SimpleModal = ({src, openModal, setModal}) => {
 //   )
 // };
 
-SimpleModal.propTypes ={
+SimpleModal.propTypes = {
   openModal: PropTypes.bool.isRequired,
-  src: PropTypes.string.isRequired 
+  src: PropTypes.string.isRequired
 }
 
 export default SimpleModal;

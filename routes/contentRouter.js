@@ -47,6 +47,8 @@ const getListAsync =  (dir, filelist) => {
               style = "fa fa-fw fa-film ";
             }else if(ext === 'pdf'){
               style ="fa fa-fw fa-file-text ";
+            }else if(ext === 'mp3'){
+              style ="fa fa-fw fa-file-audio-o ";
             }
             if( filters && filters.type){
               if (filters.type !== '0' && filters.type !== '1' && !fileType[filters.type].has(ext)){
@@ -58,7 +60,7 @@ const getListAsync =  (dir, filelist) => {
               Ext: ext,
               style: style,
               IsDirectory: false,
-              Size: stats.size + " KB",
+              Size: stats.size,
               Path: pathName
             });
           } else if (stats.isDirectory()) {
@@ -66,7 +68,7 @@ const getListAsync =  (dir, filelist) => {
               Path: pathName,
               Name: file,
               IsDirectory: true,
-              Size: "--",
+              Size: "0",
               style: "fa fa-fw fa-folder"
             });
           }
@@ -126,7 +128,9 @@ const getListAsync =  (dir, filelist) => {
     return pathContent;
   }
 
-
+  router.get('/subcategory', (req, res) => {
+    res.json([]);
+  })
 
   
   router.get('/api/customer', (req, res) => {

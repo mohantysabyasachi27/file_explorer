@@ -6,7 +6,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import HomeIcon from '@material-ui/icons/Home';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import GrainIcon from '@material-ui/icons/Grain';
+import FolderOpen from '@material-ui/icons/Folder'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,14 +22,31 @@ const useStyles = makeStyles(theme => ({
     },
   }));
   
-  function handleClick(event) {
-    event.preventDefault();
-    alert('You clicked a breadcrumb.');
+  const handleClick = (event) => {
+    //event.preventDefault();
+    //alert('You clicked a breadcrumb.');
   }
   
-  export default function IconBreadcrumbs() {
+ const IconBreadcrumbs = ({path}) => {
     const classes = useStyles();
-  
+    
+    const renderBreadCrumbs = (path) => {
+      const folderList = path.split('/');
+      
+      console.log(folderList);
+      return folderList.filter(folderName => folderName!=='').map((folder, index) => {
+       return (<Link key={index}
+         color="inherit"
+         href="/getting-started/installation/"
+         onClick={handleClick}
+         className={classes.link}
+       >
+         <FolderOpen className={classes.icon} />
+         {folder}
+       </Link>)
+      });
+   
+     }
     return (
       <Paper elevation={0} className={classes.root}>
         <Breadcrumbs aria-label="breadcrumb">
@@ -37,15 +54,7 @@ const useStyles = makeStyles(theme => ({
             <HomeIcon className={classes.icon} />
             SolarSPELL
           </Link>
-          <Link
-            color="inherit"
-            href="/getting-started/installation/"
-            onClick={handleClick}
-            className={classes.link}
-          >
-            <WhatshotIcon className={classes.icon} />
-            Environment
-          </Link>
+          {renderBreadCrumbs(path)}
           {/* <Typography color="textPrimary" className={classes.link}>
             <GrainIcon className={classes.icon} />
             Breadcrumb
@@ -54,3 +63,5 @@ const useStyles = makeStyles(theme => ({
       </Paper>
     );
   }
+
+  export default IconBreadcrumbs;

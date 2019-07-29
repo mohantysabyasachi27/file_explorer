@@ -4,6 +4,7 @@ import './App.css';
 import Table from './components/Table';
 import PrimarySearchAppBar from './components/NavbarPage';
 import Home from './components/Home';
+import Footer from './components/Footer';
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
