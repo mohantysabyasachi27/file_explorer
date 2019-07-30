@@ -109,7 +109,7 @@ const getListAsync =  (dir, filelist) => {
               Ext: ext,
               style: style,
               IsDirectory: false,
-              Size: stats.size + " KB",
+              Size: stats.size,
               Path: pathName
             });
           } else if (stats.isDirectory()) {
@@ -117,7 +117,7 @@ const getListAsync =  (dir, filelist) => {
               Path: pathName,
               Name: file.name,
               IsDirectory: true,
-              Size: "--",
+              Size: "0",
               style: "fa fa-fw fa-folder"
             });
           }
