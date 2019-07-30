@@ -11,6 +11,7 @@ var fileType=  [] ;
 fileType[2] = new Set(['pdf', 'txt', 'doc', 'docx']);
 fileType[3] = new Set(['mp3', 'aac']);
 fileType[4] = new Set(['mp4', 'mov']);
+fileType[5] = new Set(['.DS_Store','.', '..'])
 
 const getListAsync =  (dir, filelist) => {
     console.log(dir+":::"+filelist);
@@ -35,6 +36,7 @@ const getListAsync =  (dir, filelist) => {
     let pathName = newPath;
     const absPath = path.resolve(pathName);
     for (let file of files) {
+      if(fileType[5].has(file))continue;
         try {
           if(filters && filters.searchBox && !file.includes(filters.searchBox)){
             continue;
@@ -68,7 +70,7 @@ const getListAsync =  (dir, filelist) => {
               Path: pathName,
               Name: file,
               IsDirectory: true,
-              Size: "0",
+              Size: stats.size,
               style: "fa fa-fw fa-folder"
             });
           }
@@ -85,6 +87,7 @@ const getListAsync =  (dir, filelist) => {
     let pathName = newPath;
    
     for (let file of files) {
+      if(fileType[5].has(file))continue;
       const absPath = path.resolve(file.currentDir);
         try {
           if(filters && filters.searchBox && !(file.name).includes(filters.searchBox)){
@@ -117,7 +120,7 @@ const getListAsync =  (dir, filelist) => {
               Path: pathName,
               Name: file.name,
               IsDirectory: true,
-              Size: "0",
+              Size: stats.size,
               style: "fa fa-fw fa-folder"
             });
           }
@@ -128,11 +131,6 @@ const getListAsync =  (dir, filelist) => {
     return pathContent;
   }
 
-  router.get('/subcategory', (req, res) => {
-    res.json([]);
-  })
-
-  
   router.get('/api/customer', (req, res) => {
     var path = req.query.path;
     console.log('New Path:: ' + path);
@@ -155,5 +153,11 @@ const getListAsync =  (dir, filelist) => {
       });
     })
   });
+
+  router.get('/subcategory', (req, res) => {
+    var path = req.query.path;
+    console.log('subcategory:::'+path);
+    res.json([]);
+  })
 
   module.exports = router;

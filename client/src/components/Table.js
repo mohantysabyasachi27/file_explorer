@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import SimpleModal from './SimpleModal';
 import '../App.css';
 import '../css/bootstrap.min.css';
@@ -50,6 +50,7 @@ const Table = (props) => {
     }
 
     const renderRow = (row) => {
+        const href_to_file = encodeURIComponent((path+row.Name).trim());
         if(row.IsDirectory){
             return ( 
                 <td data-title="Name" className="text-xs-left col-sm-8" >
@@ -63,7 +64,7 @@ const Table = (props) => {
             return (
                 <td data-title="Name" className="text-xs-left col-sm-8" >
             <i className={row.style} />&nbsp;
-            <a className="video-modal" path={path+row.Name} onClick={(e) => handleModal(e,path+row.Name)}>
+            <a className="video-modal" path={href_to_file} onClick={(e) => handleModal(e,path+row.Name)}>
                 {row.Name}
             </a>
             </td>
@@ -72,7 +73,7 @@ const Table = (props) => {
             return (
             <td data-title="Name" className="text-xs-left col-sm-8" >
             <i className={row.style} />&nbsp;
-            <a path={path+row.Name} onClick={(e) => handleModal(e,path+row.Name)}>
+            <a path={href_to_file} onClick={(e) => handleModal(e,path+row.Name)}>
                 {row.Name}
             </a>
             </td>);
@@ -90,9 +91,7 @@ const Table = (props) => {
                 );
             });
         }else{
-            return(
-                <div>
-            </div>);
+            return(<Fragment/>);
             
         }
     }
@@ -115,7 +114,7 @@ const Table = (props) => {
             <Search setRows={setRows} path={path}/>
            <IconBreadcrumbs path={path}/>
             <div className="table-responsive container">
-                <table hide id="listr-table" className="table table-hover">
+                <table id="listr-table" className="table table-hover">
                     <thead>
                         <tr>
                             <th className="text-xs-left col-sm-8" onClick={e => onSort(e, 'Name')}>Name</th>

@@ -6,12 +6,14 @@ import PrimarySearchAppBar from './components/NavbarPage';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const App = () => {
   return (
     <div className="App">
       <Fragment>
         <PrimarySearchAppBar />
+        <CssBaseline/>
         <Router>
           <main>
             <Switch>
@@ -20,6 +22,7 @@ const App = () => {
             </Switch>
           </main>
         </Router>
+        <Footer />
       </Fragment>
     </div>
   );

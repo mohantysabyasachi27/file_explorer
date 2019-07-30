@@ -32,12 +32,12 @@ const useStyles = makeStyles(theme => ({
     
     const renderBreadCrumbs = (path) => {
       const folderList = path.split('/');
-      
+      let pathcat = '/content';
       console.log(folderList);
-      return folderList.filter(folderName => folderName!=='').map((folder, index) => {
+      return folderList.filter((folderName,index) => index!=1 && folderName!=='').map((folder, index) => {
        return (<Link key={index}
          color="inherit"
-         href="/getting-started/installation/"
+         href={pathcat=pathcat+'/'+folder}
          onClick={handleClick}
          className={classes.link}
        >

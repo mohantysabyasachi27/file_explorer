@@ -50,15 +50,17 @@ const Search = ({ setRows, path }) => {
                     <input name='query' onChange={handleChange} className="search-field form-control mr-sm-2" type="text" placeholder="  Search" aria-label="Search" />
                 </Tooltip>
                 <Tooltip title="Select the sub-category for current section." aria-label="add">
-                    <select name='category' onChange={handleChange} className="search-field mdb-select" searchable="Search here..">
+                    <select defaultValue="2" name='category' onChange={handleChange} className="search-field mdb-select" searchable="Search here..">
                         <option value="1" disabled selected>Sub-Category</option>
                         <option value="2" className="rounded-circle">
-                            Agriculture</option>
+                            All</option>
                         <option value="3" className="rounded-circle">
+                            Agriculture</option>
+                        <option value="4" className="rounded-circle">
                             Climate Change</option>
-                        <option value="4" className="rounded-circle">
+                        <option value="5" className="rounded-circle">
                             Energy</option>
-                        <option value="4" className="rounded-circle">
+                        <option value="6" className="rounded-circle">
                             Geography</option>
                     </select>
                 </Tooltip>
